@@ -55,7 +55,7 @@ public class JournalEntryService {
     }
 
     @Transactional
-    @Slf4j
+    //@Slf4J
     public boolean deleteById(ObjectId id, String userName) {
         boolean removed = false;
         try {
@@ -66,7 +66,7 @@ public class JournalEntryService {
                 journalEntryRepository.deleteById(id);
             }
         } catch (Exception e) {
-            log.error("Error: ",e);
+            //log.error("Error: ",e);
             throw new RuntimeException("An error occurred while deleting the entry.",e);
         }
         return removed;

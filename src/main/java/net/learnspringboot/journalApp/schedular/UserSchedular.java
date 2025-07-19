@@ -63,7 +63,12 @@ public class UserSchedular {
              if(mostFrequentSentiment != null){
                //  emailService.sendEmail(user.getEmail(),"Sentiment for last 7 days", mostFrequentSentiment.toString());
                  SentimentData sentimentData = SentimentData.builder().email(user.getEmail()).sentiment("Sentiment for last 7 days "+mostFrequentSentiment).build();
-                // kafkaTemplate.send("weekly-sentiment",sentimentData.getEmail(),sentimentData);
+                try{
+                    kafkaTemplate.send("weekly-sentiment",sentimentData.getEmail(),sentimentData);
+                }
+                catch (Exception e){
+                    emailService.sendEmail(user.getEmail(),"Sentiment for last 7 days", sentimentData.getSentiment());
+                }
              }
 
          }
